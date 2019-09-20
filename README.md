@@ -20,8 +20,8 @@ INSTALLATION
 
 1. Deploy Build and Docker Container
 
-  docker build --tag autoresponder .
-  docker create --name autoresponder -p xxxxx:3000 --link redis:redis -v <location>:/config autoresponder
+- docker build --tag autoresponder .
+- docker create --name autoresponder -p xxxxx:3000 --link redis:redis -v <location>:/config autoresponder
 
 2. Add .env file to Config Directory or define Environmental Variables - refer dotenv-sample
 3. Configure HTTPS Reverse Proxy or Direct Internet Connectivity for Public URL
