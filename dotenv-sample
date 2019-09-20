@@ -1,0 +1,12 @@
+# Client ID and Secret from Webex Teams Integration
+CLIENT_ID='abc123'
+CLIENT_SECRET='abc123'
+# Public URL used to host this Application
+PUBLIC_URL='https://example.cisco.com'
+# Host and Port for Redis Database
+REDIS_HOST=127.0.0.1
+REDIS_PORT=6379
+# Frequency of Supression Removal Job
+SUPRESSION_TIME=1
+# Manually Defined Secret for NodeJS Express Session Cookies
+SESSION_SECRET='secret123'

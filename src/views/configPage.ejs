@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Auto Responder</title>
+  <link href="/css/styles.css" type="text/css" rel="stylesheet" />
+  <link rel="shortcut icon" type="image/png" href="/img/favicon.ico"/>
+</head>
+<body>
+  <header class="main-header">
+    <h1><img class="cisco" src="/img/cisco.png" /><span class="spark">Webex Teams</span><img class="spark-logo" src="/img/teams-logo.png" />Auto Responder<span></span></h1>
+  </header>
+  <div class="row">
+    <div class="small-12 small-centered medium-10 large-8 columns">
+      <section class="content-box">
+        <div class="row column">
+          <p>Welcome <%= displayName %>! Please update your details below</p>
+        </div>
+        <div class="row column">
+          <p class="form-error <%= errorStatus %>">Changes not Saved! <%= errorMessage %></p><p class="form-success <%= successStatus %>">Updated Successfully</p>
+        </div>
+        <form action="/config/update" method="POST">
+          <div class="row">
+            <div class="small-5 medium-4 columns"><label class="text-right middle" for="primaryEnabled">Primary Enabled</label></div>
+            <div class="small-7 columns end text-left"><div class="switch large"><input class="switch-input" id="primaryEnabled" type="checkbox" name="primaryEnabled" value="checked" <%= primaryEnabled %>><label class="switch-paddle" for="primaryEnabled"></label></div></div>
+          </div>
+          <div class="row">
+            <input id="id" name="id" type="hidden" value="<%= personId %>" />
+            <div class="small-5 medium-4 columns"><label class="text-right middle" for="primaryEmail" title="Account ID where message notifications are sent">Primary Account Email</label></div>
+            <div class="small-7 columns end"><input id="primaryEmail" name="primaryEmail" type="text" value="<%= primaryEmail %>"/></div>
+          </div>
+          <div class="row">
+            <div class="small-5 medium-4 columns"><label class="text-right middle" for="primaryId" title="Account ID where message notifications are sent">Primary Account ID</label></div>
+            <div class="small-7 columns end"><input disabled id="primaryId" name="primaryId" type="text" value="<%= primaryId %>"/></div>
+          </div>
+          <div class="row">
+            <div class="small-5 medium-4 columns"><label class="text-right middle" for="autoResponse" title="Message returned to Recipent, supporting Webex Markdown attributes">Auto Reponse</label></div>
+            <div class="small-7 columns end"><input id="autoResponse" name="autoResponse" type="text" value="<%= autoResponse %>" /></div>
+          </div>
+          <div class="row">
+            <div class="small-5 medium-4 columns"><label class="text-right middle" for="mentionAll">Respond to @all Mention</label></div>
+            <div class="small-7 columns end text-left"><div class="switch large"><input class="switch-input" id="mentionAll" type="checkbox" name="mentionAll" value="checked" <%= mentionAll %>><label class="switch-paddle" for="mentionAll"></label></div></div>
+          </div>
+          <div class="row">
+            <div class="small-5 medium-4 columns"><label class="text-right middle" for="supressionTime" title="Supression Time between Responses">Supression Time</label></div>
+            <div class="small-7 columns end"><input id="supressionTime" name="supressionTime" type="text" value="<%= supressionTime %>" /></div>
+          </div>
+          <div class="row">
+            <div class="small-5 medium-4 columns"><label class="text-right middle" for="status">Webhook Status</label></div>
+            <div class="small-7 columns end text-left"><div class="switch large"><input class="switch-input" id="status" type="checkbox" name="status" value="checked" <%= status %>><label class="switch-paddle" for="status"></label></div></div>
+          </div>
+          <div class="row column"><button class="large button">Submit</button></div>
+        </form>
+          <div class="row column"><a href="/config/logout" class="large button">Logout</a> <a class="large button" <%= testButton %>>Test</a> <a href="/config/delete" class="large button">Delete</a></div>
+      </section>
+    </div>
+  </div>
+</body>
+
+</html>
