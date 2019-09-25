@@ -20,6 +20,8 @@ INSTALLATION
 
 1. Deploy Build and Docker Container
 
+Note: Requires seperate redis container to be running
+
 - docker build --tag autoresponder .
 - docker create --name autoresponder -p xxxxx:3000 --link redis:redis -v <location>:/config autoresponder
 
