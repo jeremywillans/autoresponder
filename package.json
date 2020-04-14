@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Autoresponder for Cisco Webex Teams",
   "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeremywillans/autoresponder.git"
+  },
   "scripts": {
     "start": "node app.js",
     "dev": "set DEBUG=auto* & nodemon app.js"
