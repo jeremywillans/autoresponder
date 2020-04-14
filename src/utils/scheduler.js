@@ -32,7 +32,7 @@ schedule.scheduleJob(tokenRefresh, async (fireDate) => {
         refresh_token: accessCodes.refresh_token,
         primaryId: output.primaryId || '',
         primaryEmail: output.primaryEmail || '',
-        primaryEnabled: output.primaryEnabled || '',
+        primaryEnabled: output.primaryEmail || '',
         autoResponse: output.autoResponse || '',
         mentionAll: output.mentionAll || '',
         supressionTime: output.supressionTime || '',
