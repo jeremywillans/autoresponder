@@ -18,7 +18,7 @@
     "body-parser": "^1.19.0",
     "chalk": "^2.4.2",
     "debug": "^3.2.6",
-    "ejs": "^2.5.7",
+    "ejs": "^3.1.7",
     "express": "^4.17.3",
     "express-session": "^1.17.1",
     "node-env-file": "^0.1.8",
