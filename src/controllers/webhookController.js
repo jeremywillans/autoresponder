@@ -15,12 +15,12 @@ function oAuthController() {
     // verify webhook payload
     try {
       await sparkService.verifyWebhookPayload(req.body);
-      debug('webook payload verified');
+      debug('webhook payload verified');
     } catch (error) {
       debug('unexpected payload POSTed, aborting...');
       res.status(400).json({
         message: 'Bad payload for Webhook',
-        details: 'either the intergration is misconfigured or Webex is running a new API version',
+        details: 'either the integration is misconfigured or Webex is running a new API version',
       });
     }
 
@@ -70,15 +70,15 @@ function oAuthController() {
       }
     }
 
-    // check if currently supressed
+    // check if currently suppressed
     try {
-      const output = await redisService.get('supress', `${req.body.createdBy}-${req.body.data.personId}`);
+      const output = await redisService.get('suppress', `${req.body.createdBy}-${req.body.data.personId}`);
       if (output !== null) {
-        debug('user supression in effect, skipping...');
+        debug('user suppression in effect, skipping...');
         return;
       }
     } catch (error) {
-      debug('not supressed! contining...');
+      debug('not suppressed! continuing...');
     }
 
     try {
@@ -96,26 +96,26 @@ function oAuthController() {
         await sparkService.postMessage(output.access_token,
           req.body.data.personId, output.autoResponse);
 
-        if (output.supressionTime !== 'None') {
+        if (output.suppressionTime !== 'None') {
           try {
-            // Verify Supression is a Number
-            let intTime = parseInt(output.supressionTime, 10);
+            // Verify Suppression is a Number
+            let intTime = parseInt(output.suppressionTime, 10);
             if (Number.isNaN(intTime)) {
               intTime = 10;
             }
-            const supressionTime = new Date();
-            supressionTime.setMinutes(supressionTime.getMinutes() + intTime);
-            const epocTime = Math.floor(supressionTime / 1000);
+            const suppressionTime = new Date();
+            suppressionTime.setMinutes(suppressionTime.getMinutes() + intTime);
+            const epocTime = Math.floor(suppressionTime / 1000);
             // Prepare Data Table for Save
             const data = {
               id: `${req.body.createdBy}-${req.body.data.personId}`,
-              supressUntil: epocTime,
+              suppressUntil: epocTime,
             };
-            // supress further messages
-            await redisService.save('supress', data);
-            debug('saved to supression list');
+            // suppress further messages
+            await redisService.save('suppress', data);
+            debug('saved to suppression list');
           } catch (error) {
-            debug('unable to save supression');
+            debug('unable to save suppression');
           }
         }
 
@@ -134,9 +134,9 @@ function oAuthController() {
         // construct message
         let message;
         if (req.body.data.roomType === 'direct') {
-          message = `You have recieved the following message from **${sourceName}** (*${messageObject.personEmail}*)\n\n>*${messageObject.text}*`;
+          message = `You have received the following message from **${sourceName}** (*${messageObject.personEmail}*)\n\n>*${messageObject.text}*`;
         } else {
-          message = `You have recieved the following message from **${sourceName}** (*${messageObject.personEmail}*) in **${roomTitle}**\n\n>*${messageObject.text}*`;
+          message = `You have received the following message from **${sourceName}** (*${messageObject.personEmail}*) in **${roomTitle}**\n\n>*${messageObject.text}*`;
         }
 
         // send message to primary account

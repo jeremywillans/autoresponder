@@ -34,7 +34,7 @@ function configController() {
         primaryEnabled: output.primaryEnabled,
         autoResponse: output.autoResponse,
         mentionAll: output.mentionAll,
-        supressionTime: output.supressionTime,
+        suppressionTime: output.suppressionTime,
         status: output.status,
         errorStatus: '',
         errorMessage: '',
@@ -91,7 +91,7 @@ function configController() {
         primaryEnabled: req.body.primaryEnabled || '',
         autoResponse: req.body.autoResponse,
         mentionAll: req.body.mentionAll || '',
-        supressionTime: req.body.supressionTime,
+        suppressionTime: req.body.suppressionTime,
         status: req.body.status || '',
         errorStatus: errStatus,
         errorMessage: errMessage,
@@ -133,7 +133,7 @@ function configController() {
           primaryEnabled: req.body.primaryEnabled || '',
           autoResponse: req.body.autoResponse || '',
           mentionAll: req.body.mentionAll || '',
-          supressionTime: req.body.supressionTime,
+          suppressionTime: req.body.suppressionTime,
           status: req.body.status || '',
         };
 
@@ -153,6 +153,7 @@ function configController() {
       } catch (error) {
         debug(`error encountered: ${error}`);
         res.send('<h1>Redis Database Issue </h1><p>Sorry, could not save the details for your Webex Teams account. Try again...</p>');
+        return;
       }
 
       res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
@@ -166,7 +167,7 @@ function configController() {
         primaryEnabled: req.body.primaryEnabled || '',
         autoResponse: req.body.autoResponse,
         mentionAll: req.body.mentionAll || '',
-        supressionTime: req.body.supressionTime,
+        suppressionTime: req.body.suppressionTime,
         status: req.body.status || '',
         errorStatus: errStatus,
         errorMessage: errMessage,

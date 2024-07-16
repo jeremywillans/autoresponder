@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2016 Cisco Systems
+// Copyright (c) 2024 Cisco Systems
 // Licensed under the MIT License
 //
 
@@ -20,7 +20,7 @@ if (!params.publicURL) {
   process.exit(1);
 }
 
-// Execure Scheduler
+// Execute Scheduler
 require('./src/utils/scheduler');
 
 app.use(express.static(path.join(__dirname, './src/public/')));

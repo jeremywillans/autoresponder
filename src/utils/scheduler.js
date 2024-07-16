@@ -11,8 +11,8 @@ tokenRefresh.dayOfWeek = [0, 2, 4, 6];
 tokenRefresh.hour = 12;
 tokenRefresh.minute = 0;
 
-const messageSupression = new schedule.RecurrenceRule();
-messageSupression.minute = 30;
+const messageSuppression = new schedule.RecurrenceRule();
+messageSuppression.minute = 30;
 
 schedule.scheduleJob(tokenRefresh, async (fireDate) => {
   debug(`This Refresh job was supposed to run at ${fireDate} but actually ran at ${new Date()}`);
@@ -35,7 +35,7 @@ schedule.scheduleJob(tokenRefresh, async (fireDate) => {
         primaryEnabled: output.primaryEnabled || '',
         autoResponse: output.autoResponse || '',
         mentionAll: output.mentionAll || '',
-        supressionTime: output.supressionTime || '',
+        suppressionTime: output.suppressionTime || '',
         status: output.status || '',
       };
 
@@ -49,28 +49,28 @@ schedule.scheduleJob(tokenRefresh, async (fireDate) => {
 });
 
 let cronInt;
-cronInt = parseInt(params.supressionTime, 10);
+cronInt = parseInt(params.suppressionTime, 10);
 if ((cronInt < 1) || (cronInt > 59) || (Number.isNaN(cronInt))) {
   cronInt = 30;
   debug('rewrite');
 }
 
 schedule.scheduleJob(`*/${cronInt} * * * *`, async (fireDate) => {
-  debug(`This Supression job was supposed to run at ${fireDate} but actually ran at ${new Date()}`);
+  debug(`This Suppression job was supposed to run at ${fireDate} but actually ran at ${new Date()}`);
 
   // Determine epoc time and add 5 minutes for balance
-  const supressionTime = new Date();
-  supressionTime.setMinutes(supressionTime.getMinutes() + 5);
-  const epocTime = Math.floor(supressionTime / 1000);
+  const suppressionTime = new Date();
+  suppressionTime.setMinutes(suppressionTime.getMinutes() + 5);
+  const epocTime = Math.floor(suppressionTime / 1000);
 
   try {
-    const keys = await redisService.hkeys('supress');
+    const keys = await redisService.hkeys('suppress');
     keys.forEach(async (element) => {
-      debug(`processing supression for ${element}`);
-      const output = await redisService.get('supress', element);
-      if (output.supressUntil <= epocTime) {
-        await redisService.remove('supress', element);
-        debug('supression removed');
+      debug(`processing suppression for ${element}`);
+      const output = await redisService.get('suppress', element);
+      if (output.suppressUntil <= epocTime) {
+        await redisService.remove('suppress', element);
+        debug('suppression removed');
       }
     });
   } catch (error) {

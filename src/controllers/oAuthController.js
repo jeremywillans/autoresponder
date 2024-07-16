@@ -7,7 +7,7 @@ function oAuthController() {
   async function getIndex(req, res) {
     debug('oauth callback initiate');
 
-    // Process Authoriation Codes
+    // Process Authorization Codes
     if (req.query.error) {
       if (req.query.error === 'access_denied') {
         debug(`user declined, received err: ${req.query.error}`);
@@ -49,10 +49,10 @@ function oAuthController() {
 
     let accessCodes;
     try {
-      // Retreive access token (expires in 14 days) & refresh token (expires in 90 days)
+      // Retrieve access token (expires in 14 days) & refresh token (expires in 90 days)
       accessCodes = await sparkService.postTokens(req.query.code);
 
-      // Retreive user name
+      // Retrieve user name
       const displayName = await sparkService.getField(accessCodes.access_token, 'people/me', 'displayName');
       const id = await sparkService.getField(accessCodes.access_token, 'people/me', 'id');
 
@@ -68,7 +68,7 @@ function oAuthController() {
           primaryEnabled: output.primaryEnabled || '',
           autoResponse: output.autoResponse || '',
           mentionAll: output.mentionAll || '',
-          supressionTime: output.supressionTime || '',
+          suppressionTime: output.suppressionTime || '',
           status: output.status || '',
         };
       } catch (err) {
@@ -82,7 +82,7 @@ function oAuthController() {
           primaryEnabled: '',
           autoResponse: '',
           mentionAll: 'checked',
-          supressionTime: '10',
+          suppressionTime: '10',
           status: '',
         };
       }
@@ -99,7 +99,7 @@ function oAuthController() {
       res.redirect('/config');
     } catch (error) {
       debug(error);
-      res.send('<h1>OAuth Integration could not complete</h1><p>Sorry, could not retreive your access token. Try again...</p>');
+      res.send('<h1>OAuth Integration could not complete</h1><p>Sorry, could not retrieve your access token. Try again...</p>');
     }
   }
 

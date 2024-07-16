@@ -391,24 +391,24 @@ function sparkService() {
         || !payload.data
       ) {
         debug('received payload is not compliant with Webhook specifications');
-        reject(new Error('invalid webook'));
+        reject(new Error('invalid webhook'));
       }
 
       if (supportedResources.indexOf(payload.resource) === -1) {
         debug(`incoming resource ${payload.resource} does not comply with webhook specifications`);
-        reject(new Error('invalid webook'));
+        reject(new Error('invalid webhook'));
       }
       if (supportedEvents.indexOf(payload.event) === -1) {
         debug(`incoming event ${payload.event} does not comply with webhook specifications`);
-        reject(new Error('invalid webook'));
+        reject(new Error('invalid webhook'));
       }
       if ((payload.resource === 'messages') && (payload.event === 'updated')) {
         debug('event "updated" is not expected for "messages" resource');
-        reject(new Error('invalid webook'));
+        reject(new Error('invalid webhook'));
       }
       if ((payload.resource === 'rooms') && (payload.event === 'deleted')) {
         debug('event "deleted" is not expected for "rooms" resource');
-        reject(new Error('invalid webook'));
+        reject(new Error('invalid webhook'));
       }
       resolve();
     });
