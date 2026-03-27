@@ -18,7 +18,7 @@
     "body-parser": "^1.19.0",
     "chalk": "^2.4.2",
     "debug": "^3.2.7",
-    "ejs": "^3.1.10",
+    "ejs": "^5.0.1",
     "express": "^4.21.2",
     "express-session": "^1.18.2",
     "node-env-file": "^0.1.8",
@@ -28,9 +28,12 @@
     "redis": "^3.1.1"
   },
   "devDependencies": {
-    "eslint": "^8.57.1",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.31.0",
+    "eslint": "^10.1.0",
+    "eslint-config-airbnb-base": "^7.1.0",
+    "eslint-plugin-import": "^1.14.0",
     "nodemon": "^3.1.9"
+  },
+  "overrides": {
+    "eslint": "^10.1.0"
   }
 }
